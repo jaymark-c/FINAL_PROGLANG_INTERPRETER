@@ -135,8 +135,14 @@ public class Code : CodeBaseVisitor<object?>
             {
                 Console.WriteLine("Error no value initialized");
                 Environment.Exit(1);   
-            }
-            Console.Write(arrItem);
+            }else if (arrItem is bool)
+            {
+                if(arrItem is true)
+                    Console.Write("TRUE");
+                else
+                    Console.Write("FALSE");
+            }else
+                Console.Write(arrItem);
         }
         return null;
     }
