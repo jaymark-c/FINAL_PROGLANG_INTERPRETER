@@ -1,0 +1,28 @@
+#I am comment
+BEGIN CODE
+    INT x=5
+    IF(5<3)
+    BEGIN IF
+       INT z=5
+       x = 10
+       DISPLAY: z
+    END IF
+    ELSE IF (5==5)
+    BEGIN IF
+        IF(x==5)
+        BEGIN IF
+            INT q = 10
+            DISPLAY : q
+            q = 20
+            DISPLAY: q
+            DISPLAY: "Okay"
+            x = 100
+        END IF
+    END IF
+    ELSE
+    BEGIN IF
+        DISPLAY: x
+    END IF
+    #DISPLAY: x
+    DISPLAY: x
+END CODE

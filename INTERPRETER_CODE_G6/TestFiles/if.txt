@@ -1,0 +1,22 @@
+BEGIN CODE
+    INT x=5
+    IF(x==5)
+    BEGIN IF
+        INT y=2
+        DISPLAY: y & $
+        IF(x==5)
+        BEGIN IF
+            INT q=2
+            q = q + 2
+            DISPLAY: y & " " & q & $
+        END IF
+        IF(x==5)
+        BEGIN IF
+            q=9
+            DISPLAY: y
+            q = 2321-23
+        END IF
+    END IF
+    INT y=0
+    DISPLAY: y
+END CODE

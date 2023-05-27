@@ -1,0 +1,8 @@
+BEGIN CODE
+    INT x=5
+    DISPLAY: x
+    x=x+1
+    DISPLAY: x
+    x = -x
+    DISPLAY: x
+END CODE

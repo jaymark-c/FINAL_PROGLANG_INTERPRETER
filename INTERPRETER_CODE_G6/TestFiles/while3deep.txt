@@ -1,0 +1,23 @@
+BEGIN CODE
+    INT x=3
+    INT y = 1
+    INT q = 1
+    WHILE(x<5)
+    BEGIN WHILE
+        y = 3
+        DISPLAY: "ok" & $
+        x = x+1
+        WHILE(y > 1)
+        BEGIN WHILE
+            DISPLAY: "hokbalap y value: " & y & $
+            y=y-1
+            q = 4
+            WHILE(q == 4)
+            BEGIN WHILE
+                DISPLAY: "ok i am " & q & $
+                q = q+1
+                DISPLAY: "Dd not continue? " & q & $
+            END WHILE
+        END WHILE
+    END WHILE
+END CODE

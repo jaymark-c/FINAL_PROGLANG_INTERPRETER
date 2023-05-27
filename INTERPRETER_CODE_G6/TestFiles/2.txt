@@ -1,0 +1,26 @@
+BEGIN CODE
+    INT x = 4
+    WHILE(x<5)
+    BEGIN WHILE
+        WHILE(x<5)
+        BEGIN WHILE
+            INT y = 100
+            DISPLAY: y & " 1y" & $
+            #x = x+1
+            DISPLAY: "Okay"
+             WHILE(y==100)
+                    BEGIN WHILE
+                        DISPLAY: y & " 2y" & $
+                        y=y+1
+                        #x = x+1
+                        DISPLAY: "Okay2"
+                    END WHILE 
+             WHILE(x<5)
+                BEGIN WHILE
+                    DISPLAY: y & " 2y" & $
+                    x = x+1
+                    DISPLAY: "Okay3"
+                 END WHILE         
+        END WHILE
+    END WHILE
+END CODE

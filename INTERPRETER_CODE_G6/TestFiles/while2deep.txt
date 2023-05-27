@@ -1,0 +1,14 @@
+BEGIN CODE
+    INT x=3
+    WHILE(x<5)
+    BEGIN WHILE
+        INT y = 3
+        DISPLAY: "ok" & $
+        x = x+1
+        WHILE(y > 1)
+        BEGIN WHILE
+            DISPLAY: "hokbalap" & $
+            y=y-1
+        END WHILE
+    END WHILE
+END CODE

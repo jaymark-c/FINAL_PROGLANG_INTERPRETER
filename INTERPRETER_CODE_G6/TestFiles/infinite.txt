@@ -1,0 +1,14 @@
+BEGIN CODE
+ INT a = 1
+ CHAR as = 'x'
+ WHILE(a<5)
+  BEGIN WHILE
+   WHILE(b<a)
+    BEGIN WHILE
+      DISPLAY:as
+      b = b + 1 
+    END WHILE
+      DISPLAY: $
+      a = a + 1
+  END WHILE
+END CODE

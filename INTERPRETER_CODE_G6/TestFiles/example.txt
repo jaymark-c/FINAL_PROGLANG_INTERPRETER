@@ -1,0 +1,5 @@
+BEGIN CODE
+    INT y = 5
+    y = y*2
+    DISPLAY: y
+END CODE

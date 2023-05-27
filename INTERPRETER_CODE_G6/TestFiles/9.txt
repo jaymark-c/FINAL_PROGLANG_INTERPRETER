@@ -1,0 +1,5 @@
+BEGIN CODE
+    BOOL x = "TRUE"
+    INT q = 5
+    DISPLAY: NOT(x)
+END CODE

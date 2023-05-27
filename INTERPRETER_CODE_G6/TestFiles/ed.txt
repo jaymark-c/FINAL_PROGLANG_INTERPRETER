@@ -1,0 +1,7 @@
+BEGIN CODE
+    INT x,y,z=15
+    DISPLAY: z & $
+    x = 7
+    y = 10
+    DISPLAY: "New value for x and y : " & x & " " & y
+END CODE
