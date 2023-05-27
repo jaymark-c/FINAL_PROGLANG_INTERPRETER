@@ -93,9 +93,14 @@ public class Code : CodeBaseVisitor<object?>
                 try
                 {
                     var convInput = userInputIdentifiers[varcnt];
-                
-                    if(convInput is "TRUE" or "FALSE")
-                        BooleanIdentifier[arrItem.ToString()!] = convInput;
+
+                    if (convInput is "TRUE" or "FALSE")
+                    {
+                        if (convInput == "TRUE")
+                            BooleanIdentifier[arrItem.ToString()!] = true;
+                        else
+                            BooleanIdentifier[arrItem.ToString()!] = false;
+                    }
                     else
                     {
                         Console.WriteLine("Cannot recognize \"TRUE\" or \"FALSE\" value");
