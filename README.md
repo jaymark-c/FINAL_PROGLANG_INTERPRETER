@@ -7,7 +7,7 @@ programming. It was developed by a group of students enrolled in the Programming
   
 <h2>Language Specification of CODE Programming Language</h2>
 
-<p>Sample Program:
+Sample Program:
 # this is a sample program in CODE
 BEGIN CODE
 INT x, y, z=5
@@ -128,5 +128,5 @@ BEGIN WHILE
 <statement>
 …
  <statement>
-END WHILE</p>
+END WHILE
   
