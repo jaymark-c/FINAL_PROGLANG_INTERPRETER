@@ -5,7 +5,7 @@
 programming. It was developed by a group of students enrolled in the Programming Languages course. CODE is a pure
   interpreter.</p>
   
-<h2>Language Specification of CODE Programming Language</h>
+<h2>Language Specification of CODE Programming Language</h2>
 
 <p>Sample Program:
 # this is a sample program in CODE
