@@ -158,6 +158,7 @@ public class Code : CodeBaseVisitor<object?>
         {
             var cfname = context.COLONFUNCTION().GetText();
             var express = context.expression().Select(Visit).ToArray();
+            //Console.WriteLine(express[0].GetType());
             if (express.Length == 0)
             {
                 Console.WriteLine("No value/s received");
@@ -239,7 +240,94 @@ public class Code : CodeBaseVisitor<object?>
     /// <returns>none</returns>
     public override object? VisitDeclaration(CodeParser.DeclarationContext context)
     {
-        Visit(context.declarations());
+        if (context.equalDeclaration() != null)
+        {
+            var dataType = context.DATATYPE().GetText();
+            var arrVar = context.equalDeclaration().GetText().Split("=");
+            var varValue = arrVar[arrVar!.Length - 1];
+            for (int i = 0; i < arrVar.Length - 1; i++)
+            {
+                switch (dataType)
+                {
+                    case "INT":
+                        if (IntegerIdentifier.ContainsKey(arrVar[i]))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+
+                        IntegerIdentifier[arrVar[i]] = int.Parse(varValue);
+                        break;
+                    case "BOOL":
+                        if (BooleanIdentifier.ContainsKey(arrVar[i]))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+                        
+                        if (varValue == "\"TRUE\"")
+                            BooleanIdentifier[arrVar[i]] = true;
+                        else
+                            BooleanIdentifier[arrVar[i]] = false;
+                        break;
+                    case "CHAR":
+                        if (CharacterIdentifier.ContainsKey(arrVar[i]))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+
+                        CharacterIdentifier[arrVar[i]] = char.Parse(varValue);
+                        break;
+                    case "FLOAT":
+                        if (FloatIdentifier.ContainsKey(arrVar[i]))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+                        FloatIdentifier[arrVar[i]] = float.Parse(varValue);
+                        break;
+                }
+            }
+            /*foreach (var s in arrVar)
+            {
+                switch (dataType)
+                {
+                    case "INT":
+                        if (IntegerIdentifier.ContainsKey(s))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+
+                        IntegerIdentifier[s] = int.Parse(varValue);
+                        break;
+                    case "BOOL":
+                        if (BooleanIdentifier.ContainsKey(s))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+                        if(varValue == "\"TRUE\"")
+                            BooleanIdentifier[s] = true;
+                        else
+                            BooleanIdentifier[s] = false;
+                        break;
+                    case "CHAR":
+                        if (CharacterIdentifier.ContainsKey(s))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+                        CharacterIdentifier[s] = char.Parse(varValue);
+                        break;
+                    case "FLOAT":
+                        if (FloatIdentifier.ContainsKey(s))
+                        {
+                            Console.WriteLine("Identifier already declare");
+                        }
+                        FloatIdentifier[s] = float.Parse(varValue);
+                        break;
+                }
+            }*/
+        }
+        else
+        {
+            Visit(context.declarations());
+        }
         return null;
     }
     
@@ -270,7 +358,11 @@ public class Code : CodeBaseVisitor<object?>
         }
         if (BooleanIdentifier.TryGetValue(identifier, out var visitIdentifierExpression3))
         {
-            return visitIdentifierExpression3;
+            //Console.WriteLine(visitIdentifierExpression3.GetType());
+            if (visitIdentifierExpression3!.ToString() == "True")
+                return "TRUE";
+            return "FALSE";
+            //return visitIdentifierExpression3;
         }
         Console.WriteLine($"Variable {identifier} is not defined");
         Environment.Exit(1);
@@ -313,7 +405,8 @@ public class Code : CodeBaseVisitor<object?>
             case "FLOAT":
                 if (!shouldNull)
                 {
-                    if (identifierValue is not float || identifierValue is not int)
+                    //Console.WriteLine(identifierValue.GetType().ToString() == "System.Single");
+                    if (identifierValue is not float && identifierValue is not int)
                     {
                         Console.WriteLine("Not a FLOAT");
                         Environment.Exit(1);
@@ -322,6 +415,7 @@ public class Code : CodeBaseVisitor<object?>
                 FloatIdentifier[identifierName] = identifierValue;
                 break;
             case "BOOL":
+                
                 if (!shouldNull)
                 {
                     if (!(identifierValue!.Equals(true)|| identifierValue.Equals(false)))
@@ -329,12 +423,12 @@ public class Code : CodeBaseVisitor<object?>
                         Console.WriteLine("Not a boolean");
                         Environment.Exit(1);
                     }
-                    BooleanIdentifier[identifierName] = identifierValue;
                 }
+                BooleanIdentifier[identifierName] = identifierValue;
                 break;
         }
     }
-    
+
     /// <summary>
     /// Assigns a value to an identifier
     /// </summary>
