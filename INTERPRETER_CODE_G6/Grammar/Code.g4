@@ -2,31 +2,41 @@ grammar Code;
 
 /*Parser rules*/
 program: BEGIN NEWLINE (declaration NEWLINE)* lines* END (NEWLINE)* EOF;
-lines:((assignment | colonFunc | ifBlock | whileBlock) NEWLINE)+;
+lines:((assignment | colonFunc | ifBlock | whileBlock) NEWLINE)+ | NEWLINE;
+
 ifBlock: IF '(' expression ')' NEWLINE block (NEWLINE ELSE elseIfBlock)?;
 elseIfBlock: NEWLINE block | ifBlock;
+
 blockLine: lines*;
 block: BEGINIF NEWLINE blockLine ENDIF;
+
 whileBlock: 'WHILE' '(' expression ')'NEWLINE inWhileBlock ;
 inWhileBlock: BEGINWHILE NEWLINE lines ENDWHILE;
-declaration: DATATYPE declarations;
+
+declaration: DATATYPE (declarations || equalDeclaration);
+equalDeclaration: IDENTIFIER ( ASSIGN IDENTIFIER )* ASSIGN constant;
 declarations: terminalDeclaration (','terminalDeclaration)*;
 terminalDeclaration: (IDENTIFIER|IDENTIFIER ASSIGN expression);
+
 assignment: assignments ASSIGN ('+'|'-')? expression;
 assignments: IDENTIFIER (ASSIGN IDENTIFIER)* ;
+
 colonFunc: COLONFUNCTION COLON ( expression (',' expression)*)?;
+
 constant: CHARLITERAL | INTEGERLITERAL | FLOATLITERAL | BOOLEANLITERAL | STRINGLITERAL;
+
 expression:
-     ('+'|'-')? constant	     # constantExpression
-	| '(' expression ')'         # parenthesizedExpression
-	| 'NOT' expression           # notBoolExpression
-	| IDENTIFIER			     # identifierExpression
-	| DOLLARSIGNCARRIAGE         # newLineExpression
-	| colonFunc			         # colonFuncExpression
-	| expression binaryOperation expression # binaryExpression
-	| expression logicalOperation expression # logicalExpression
-	| expression booleanOperation expression # booleanExpression
+     ('+'|'-')? constant	                     # constantExpression
+	| '(' expression ')'                         # parenthesizedExpression
+	| 'NOT' expression                           # notBoolExpression
+	| IDENTIFIER			                     # identifierExpression
+	| DOLLARSIGNCARRIAGE                         # newLineExpression
+	| colonFunc			                         # colonFuncExpression
+	| expression binaryOperation expression      # binaryExpression
+	| expression logicalOperation expression     # logicalExpression
+	| expression booleanOperation expression     # booleanExpression
 	| expression concatenateOperation expression # concatenateExpression;
+	
 binaryOperation: '*' | '/' | '%' | '+' | '-';
 logicalOperation: 'AND' | 'OR';
 booleanOperation: '>' | '<' | '>=' | '<=' | '==' | '<>';
@@ -53,5 +63,5 @@ STRINGLITERAL: ('"' ~'"'* '"') | ('[' ~']'* ']'+);
 WS: [ \t\r]+ -> skip;
 NEWLINE: [\r|\n]+;
 COLONFUNCTION: 'DISPLAY' | 'SCAN';
-IDENTIFIER: [_a-z][a-zA-Z0-9_]* | [a-z][a-zA-Z0-9_]*;
+IDENTIFIER: [_a-zA-Z][a-zA-Z0-9_]*;
 COMMENT: '#' ~[\r\n]* [\r|\n]*-> skip;
